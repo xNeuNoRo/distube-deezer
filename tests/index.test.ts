@@ -1,4 +1,4 @@
-import { DeezerPlugin } from "..";
+import { DeezerPlugin } from "@";
 
 test("DeezerPluginOptions", () => {
   const n: any = NaN;

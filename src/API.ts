@@ -9,7 +9,7 @@ const get = async (path: string): Promise<any> => {
     method: "GET",
   });
 
-  const data = await body.json();
+  const data: any = await body.json();
   if (data.error) throw new Error(data.error?.message);
   return data;
 };

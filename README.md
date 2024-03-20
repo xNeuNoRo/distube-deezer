@@ -8,6 +8,9 @@
     <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/distubejs/deezer?logo=github&logoColor=white&style=flat-square">
     <a href="https://discord.gg/feaDd9h"><img alt="Discord" src="https://img.shields.io/discord/732254550689316914?logo=discord&logoColor=white&style=flat-square"></a>
   </p>
+  <p>
+    <a href='https://ko-fi.com/skick' target='_blank'><img height='48' src='https://storage.ko-fi.com/cdn/kofi3.png' alt='Buy Me a Coffee at ko-fi.com' /></a>
+  </p>
 </div>
 
 # @distube/deezer
@@ -52,5 +55,29 @@ const distube = new DisTube(client, {
 new DeezerPlugin({
   parallel: true,
   emitEventsAfterFetching: false,
+});
+```
+
+##### Use SoundCloudPlugin to search instead of YouTube
+
+```ts
+import { DisTube } from "distube";
+import { DeezerPlugin } from "@distube/deezer";
+import { SoundCloudPlugin } from "@distube/soundcloud";
+
+const scPlugin = new SoundCloudPlugin();
+
+class NewDeezerPlugin extends DeezerPlugin {
+  override async search(query: string, metadata: any) {
+    try {
+      return new Song((await scPlugin.search(query, { limit: 1 }))[0], { metadata });
+    } catch {
+      return null;
+    }
+  }
+}
+
+const distube = new DisTube(client, {
+  plugins: [new NewDeezerPlugin(), scPlugin],
 });
 ```

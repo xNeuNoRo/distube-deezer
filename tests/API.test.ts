@@ -1,4 +1,4 @@
-import { getAlbum, getPlaylist, getTrack } from "../API";
+import { getAlbum, getPlaylist, getTrack } from "@/API";
 
 test("getTrack", async () => {
   const track = await getTrack("1680957537");
