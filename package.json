@@ -19,7 +19,7 @@
     "build": "tsup",
     "build:check": "tsc --noEmit",
     "update": "ncu -u && bun update",
-    "postinstall": "husky install",
+    "postinstall": "npx husky install",
     "prepack": "bun run build && pinst -d",
     "postpack": "pinst -e"
   },
@@ -43,6 +43,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
+    "@types/bluebird": "^3.5.42",
     "@types/jest": "^29.5.12",
     "commitlint": "^19.2.1",
     "distube": "^4.1.1",
@@ -58,6 +59,7 @@
     "typescript": "^5.4.2"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "undici": "^6.9.0"
   },
   "peerDependencies": {
