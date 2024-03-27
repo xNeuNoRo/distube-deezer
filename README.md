@@ -17,14 +17,32 @@
 
 A DisTube custom plugin for supporting Deezer URL.
 
+-NeuNoRo Fork  
+I do not own this project, this is a fork intended to use my changes more easily in my project. All rights are reserved to [Skick](https://github.com/skick1234)
+
 ## Feature
 
 This plugin grabs the songs on Deezer then searches on YouTube and plays with DisTube.
 
+## Fork Changes
+
+### Features:
+
+Added new methods:  
+- maxPlaylistTracks
+- songsPerRequest
+- requestDelay
+
+### Changes:
+
+- The playSong event is always emitted [regardless of the emitEventsAfterFetching parameter] before initializing the fetch process for the rest of the songs in the playlist.
+- The songs will be automatically added to the queue as each batch is finished and after all the batches are finished they will be sorted.
+- A new queue will be created automatically if it is detected that it has ended before completing the process of fetching all the songs.
+
 ## Installation
 
 ```sh
-npm install @distube/deezer@latest
+npm install https://github.com/xNeuNoRo/distube-deezer
 ```
 
 ## Usage
@@ -48,6 +66,9 @@ const distube = new DisTube(client, {
 - `DeezerPluginOptions.emitEventsAfterFetching`: Default is `false`. Emits `addList` and `playSong` event before or after fetching all the songs.
   > If `false`, DisTube plays the first song -> emits `addList` and `playSong` events -> fetches all the rest\
   > If `true`, DisTube plays the first song -> fetches all the rest -> emits `addList` and `playSong` events
+- `DeezerPluginOptions.maxPlaylistTrack`: Default is `200`. This is the max songs to fetch per playlist.
+- `DeezerPluginOptions.songsPerRequest`: Default is `10`. This is the amount of songs to fetch for each batch of requests.
+- `DeezerPluginOptions.requestDelay`: Default is `1000`. This is the delay for each batch of requests in milliseconds.
 
 #### Example
 
@@ -55,6 +76,9 @@ const distube = new DisTube(client, {
 new DeezerPlugin({
   parallel: true,
   emitEventsAfterFetching: false,
+  maxPlaylistTrack: 1500,
+  songsPerRequest: 20,
+  requestDelay: 1000,
 });
 ```
 
